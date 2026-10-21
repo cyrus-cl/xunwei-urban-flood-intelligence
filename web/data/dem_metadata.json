@@ -1,0 +1,23 @@
+{
+  "source": "Existing Copernicus GLO-30 display grid",
+  "input_grid": [
+    300,
+    300
+  ],
+  "bounds": [
+    120.99986111111112,
+    29.000138888888888,
+    121.99986111111112,
+    30.000138888888888
+  ],
+  "display_sample_m_approx": 370,
+  "encoding": "Mapbox Terrain RGB; -10000 + (R*65536+G*256+B)*0.1 m",
+  "zoom": [
+    8,
+    11
+  ],
+  "tiles": 78,
+  "exaggeration": 1,
+  "resampling": "Bilinear from existing 300x300 reduced display data; does not add native spatial detail",
+  "outside_input": "0 m display only"
+}

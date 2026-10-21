@@ -1,0 +1,18 @@
+import http from 'node:http';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {spawn} from 'node:child_process';
+import {routeApi} from './services/api-router.mjs';
+import {weatherService} from './services/weather-service.mjs';
+import {createDecisionBrief,decisionBriefService} from './services/deepseek-service.mjs';
+import {createBuildingService} from './services/building-service.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'web');
+const arg=process.argv.indexOf('--port'),port=arg>=0?Number(process.argv[arg+1]):8767;
+if(!Number.isInteger(port)||port<1024||port>65535)throw Error('Invalid port');
+const buildingService=createBuildingService({buildingsPath:path.join(root,'data','atlas_buildings.geojson'),centersPath:path.join(root,'data','building_centers.json')});
+const offline=process.argv.includes('--offline'),apiServices=offline?{weather:{get:async()=>{throw Error('offline');}},decisionBrief:{create:input=>createDecisionBrief(input,{apiKey:''})},buildings:buildingService}:{weather:weatherService,decisionBrief:decisionBriefService,buildings:buildingService};
+const mime={'.html':'text/html; charset=utf-8','.js':'application/javascript','.mjs':'application/javascript','.css':'text/css','.json':'application/json','.geojson':'application/geo+json','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.wav':'audio/wav','.pdf':'application/pdf','.f32':'application/octet-stream','.woff2':'font/woff2'};
+const server=http.createServer(async(req,res)=>{try{const pathname=decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname);if(pathname==='/api/health'){res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({ok:true,project:'rain-here',version:'2026.10.17-v7',weather:offline?'offline':'Open-Meteo',decision:offline?'local fallback':'grounded summary'}));return;}if(await routeApi(req,res,apiServices))return;if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);res.end();return;}const file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));if(file!==root&&!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}const bytes=await fs.readFile(file);res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(req.method==='HEAD'?undefined:bytes);}catch(e){res.writeHead(404);res.end('File not found');}});
+server.listen(port,'127.0.0.1',()=>{const url='http://127.0.0.1:'+port;console.log('Rain, Here V7: '+url);if(process.argv.includes('--open')&&process.platform==='win32'){const opener=spawn('cmd.exe',['/c','start','',url],{stdio:'ignore',windowsHide:true});opener.on('error',()=>console.log('Open '+url+' in your browser.'));}});
+export {server};

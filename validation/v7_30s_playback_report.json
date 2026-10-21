@@ -1,0 +1,19 @@
+{
+  "release": "2026.10.17-v7",
+  "passed": true,
+  "created": "2026-10-17T05:28:32.878Z",
+  "evidence": {
+    "durationMs": 30254.19999998808,
+    "startIndex": 90,
+    "endIndex": 113,
+    "frames": 1457,
+    "p95FrameGapMs": 16.799999999999272,
+    "maxFrameGapMs": 533.3000000000011,
+    "gapsOver50Ms": 44,
+    "longTasks": [],
+    "active3d": true,
+    "mapCanvases": 1,
+    "waterVisible": true,
+    "maxLongTaskMs": 0
+  }
+}

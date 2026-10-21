@@ -1,0 +1,254 @@
+{
+  "created": "2026-10-21T12:17:46.901Z",
+  "engine": "Node worker_threads, same ES module as browser; local files only",
+  "checks": [
+    {
+      "name": "trained AI scenario",
+      "pass": true,
+      "evidence": {
+        "area_above_010m_km2": 42.4116,
+        "max_depth_m": 0.8536989641342368,
+        "building_footprint_overlap_010m": 2021,
+        "road_overlap_km": 155.02974199999997,
+        "builtup_sample_area_km2": 8.0352
+      }
+    },
+    {
+      "name": "historical original report preserved",
+      "pass": true,
+      "evidence": {
+        "report": 88.6788,
+        "export": 88.71119999999999
+      }
+    },
+    {
+      "name": "9 deliberately chosen cases",
+      "pass": true,
+      "evidence": [
+        {
+          "peak_mm_h": 20,
+          "drainage_mm_h": 0
+        },
+        {
+          "peak_mm_h": 20,
+          "drainage_mm_h": 6
+        },
+        {
+          "peak_mm_h": 20,
+          "drainage_mm_h": 12
+        },
+        {
+          "peak_mm_h": 30,
+          "drainage_mm_h": 0
+        },
+        {
+          "peak_mm_h": 30,
+          "drainage_mm_h": 6
+        },
+        {
+          "peak_mm_h": 30,
+          "drainage_mm_h": 12
+        },
+        {
+          "peak_mm_h": 40,
+          "drainage_mm_h": 0
+        },
+        {
+          "peak_mm_h": 40,
+          "drainage_mm_h": 6
+        },
+        {
+          "peak_mm_h": 40,
+          "drainage_mm_h": 12
+        }
+      ]
+    },
+    {
+      "name": "outside point receives no depth",
+      "pass": true,
+      "evidence": {
+        "id": "outside",
+        "coverage": "outside",
+        "interpretation": "地点在计算范围之外，暂保留为待核对地点"
+      }
+    },
+    {
+      "name": "in-grid point has 9 case records",
+      "pass": true,
+      "evidence": {
+        "id": "inside",
+        "grid_index": 8320,
+        "grid_lon": 121.5,
+        "grid_lat": 29.86,
+        "land_class": 40,
+        "land_name": "耕地",
+        "permanent_water": false,
+        "exceed_count": 0,
+        "scenario_count": 9,
+        "threshold_cm": 10,
+        "threshold_sensitivity": {
+          "at_8cm": 0,
+          "at_12cm": 0
+        },
+        "min_cm": 0.16547457322484463,
+        "median_cm": 0.5905445889346654,
+        "max_cm": 0.8659898506042315,
+        "nearby_3x3_min_cm": 0.07807224228917048,
+        "nearby_3x3_max_cm": 9.469506886464586,
+        "road_sample_km": 0,
+        "cases": [
+          {
+            "peak_mm_h": 20,
+            "drainage_mm_h": 0,
+            "depth_cm": 0.5656346756307855
+          },
+          {
+            "peak_mm_h": 20,
+            "drainage_mm_h": 6,
+            "depth_cm": 0.4109333830087942
+          },
+          {
+            "peak_mm_h": 20,
+            "drainage_mm_h": 12,
+            "depth_cm": 0.16547457322484463
+          },
+          {
+            "peak_mm_h": 30,
+            "drainage_mm_h": 0,
+            "depth_cm": 0.7177257795452533
+          },
+          {
+            "peak_mm_h": 30,
+            "drainage_mm_h": 6,
+            "depth_cm": 0.5905445889346654
+          },
+          {
+            "peak_mm_h": 30,
+            "drainage_mm_h": 12,
+            "depth_cm": 0.4397644402053209
+          },
+          {
+            "peak_mm_h": 40,
+            "drainage_mm_h": 0,
+            "depth_cm": 0.8659898506042315
+          },
+          {
+            "peak_mm_h": 40,
+            "drainage_mm_h": 6,
+            "depth_cm": 0.7314265182295476
+          },
+          {
+            "peak_mm_h": 40,
+            "drainage_mm_h": 12,
+            "depth_cm": 0.6344829339367059
+          }
+        ],
+        "interpretation": "180 米格点情景筛查，现场情况待核对",
+        "snap_distance_m": 0,
+        "coverage": "in_grid"
+      }
+    },
+    {
+      "name": "8 and 12 cm threshold counts ordered",
+      "pass": true
+    },
+    {
+      "name": "candidate cells exclude water and have real road overlap",
+      "pass": true,
+      "evidence": [
+        {
+          "cell": 7790,
+          "count": 8,
+          "road_km": 1.755484
+        },
+        {
+          "cell": 9766,
+          "count": 8,
+          "road_km": 1.231015
+        },
+        {
+          "cell": 11450,
+          "count": 8,
+          "road_km": 1.110022
+        },
+        {
+          "cell": 5242,
+          "count": 8,
+          "road_km": 0.987879
+        },
+        {
+          "cell": 6011,
+          "count": 8,
+          "road_km": 0.868587
+        },
+        {
+          "cell": 5237,
+          "count": 8,
+          "road_km": 0.767579
+        },
+        {
+          "cell": 11857,
+          "count": 8,
+          "road_km": 0.64044
+        },
+        {
+          "cell": 10679,
+          "count": 8,
+          "road_km": 0.630198
+        }
+      ]
+    },
+    {
+      "name": "field validation explicitly pending",
+      "pass": true
+    },
+    {
+      "name": "map counts bounded",
+      "pass": true
+    },
+    {
+      "name": "location evidence matches actual AI field",
+      "pass": true
+    },
+    {
+      "name": "sensitivity set in model domain 20",
+      "pass": true,
+      "evidence": {
+        "time_ms": 6.834000000000003,
+        "peaks": [
+          10,
+          20,
+          30
+        ]
+      }
+    },
+    {
+      "name": "sensitivity set in model domain 50",
+      "pass": true,
+      "evidence": {
+        "time_ms": 10.971799999999973,
+        "peaks": [
+          40,
+          50,
+          60
+        ]
+      }
+    },
+    {
+      "name": "invalid scope rejected {\"peak\":19,\"n\":0}",
+      "pass": true
+    },
+    {
+      "name": "invalid scope rejected {\"peak\":51,\"n\":0}",
+      "pass": true
+    },
+    {
+      "name": "invalid scope rejected {\"peak\":30,\"n\":31}",
+      "pass": true
+    }
+  ],
+  "passed": 15,
+  "total": 15,
+  "field_validation": "pending",
+  "first_screening_ms": 19.697400000000002
+}

@@ -1,0 +1,16 @@
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+runtime/
+output/
+.playwright-cli/
+browser_profile*/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+Thumbs.db
+
